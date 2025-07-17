@@ -14,7 +14,7 @@ const menu = [
 
 export default function Sidebar() {
   return (
-    <div className="h-screen w-56 bg-white shadow-lg flex flex-col px-4">
+    <div className="h-screen w-[245px] bg-white shadow-lg flex flex-col px-4">
       <nav className="flex flex-col gap-2 mt-5">
         {menu.map((item, idx) => (
           <div
