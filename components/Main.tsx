@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { HiFire } from "react-icons/hi";
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { FaFaceSmileWink } from "react-icons/fa6";
-import { FaCar, FaCamera, FaShareAlt, FaFont, FaHeart, FaRegHeart, FaComment, FaTrash, FaEdit, FaEllipsisH } from "react-icons/fa";
+import { FaCar, FaCamera, FaShareAlt, FaFont, FaHeart, FaComment, FaTrash, FaEdit, FaEllipsisH } from "react-icons/fa";
 import { PiDotsThreeCircleFill } from "react-icons/pi";
 import { FiMoreHorizontal } from "react-icons/fi";
 
@@ -49,7 +49,7 @@ export default function HomeFeed() {
   const [userText, setUserText] = useState('');
   const [userFont, setUserFont] = useState('sans-serif');
   const [fontMenuVisible, setFontMenuVisible] = useState(false);
-  const [chosenFile, setChosenFile] = useState<{type: 'image' | 'video', url: string} | null>(null);
+  const [chosenFile, setChosenFile] = useState<{ type: 'image' | 'video', url: string } | null>(null);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
@@ -101,17 +101,17 @@ export default function HomeFeed() {
       },
       sharedContent: chosenFile.type === 'video' ? 'shared a Video' : 'shared a Photo'
     };
-    
+
     setAllPosts([newPost, ...allPosts]);
     resetForm();
   };
 
   const handleUpdatePost = () => {
     if (!editingPost || !chosenFile) return;
-    
-    setAllPosts(allPosts.map(post => 
-      post.id === editingPost.id ? { 
-        ...post, 
+
+    setAllPosts(allPosts.map(post =>
+      post.id === editingPost.id ? {
+        ...post,
         message: userText,
         font: userFont,
         media: {
@@ -120,7 +120,7 @@ export default function HomeFeed() {
         }
       } : post
     ));
-    
+
     resetForm();
   };
 
@@ -201,31 +201,31 @@ export default function HomeFeed() {
   };
 
   return (
-    <div className="ml-13">
-      <div className="mt-13 flex gap-5 flex-wrap">
+    <div className=" pt-4 pl-4 pr-4 mt-[75px]">
+      <div className=" ml-[35px] mt-[5px] flex gap-5 flex-wrap">
         {categories.map((cat) => (
           <div
             key={cat.label}
-            className="w-[142px] h-[100px] flex flex-col items-center justify-center bg-white rounded-2xl transition-transform hover:scale-105 hover:shadow-lg cursor-pointer"
+            className="w-[142px] h-[100px] flex flex-col items-center justify-center bg-white rounded-md transition-transform hover:scale-105 hover:shadow-lg cursor-pointer"
           >
-            <div className="flex items-center mt-2 justify-center mb-4 text-3xl" style={{ color: cat.color }}>
+            <div className="flex items-center mt-2 justify-center mb-4 text-4xl" style={{ color: cat.color }}>
               {cat.icon}
             </div>
-            <h3 className="text-lg text-[#949FB7] mb-1 text-center">{cat.label}</h3>
+            <h3 className="text-base text-[#949FB7] font-sans mb-1 text-center">{cat.label}</h3>
           </div>
         ))}
       </div>
 
-      <div className="mt-13 w-[570px] bg-white rounded-lg shadow-sm">
+      <div className="mt-13 ml-[35px] h-[162px] w-[570px] bg-white rounded-lg">
         <div className="flex border-b border-gray-100">
-          <button className="px-6 py-3 text-[#C11759] font-semibold border-b-2 border-[#C11759]">Make Post</button>
-          <button className="px-6 py-3 text-[#949FB7]" onClick={openFileDialog}>Photo or Video Album</button>
-          <input 
+          <button className="px-6 py-3 text-[#C11759] text-md border-b-2 border-[#C11759]">Make Post</button>
+          <button className="px-6 py-3 text-[#949FB7] text-base" onClick={openFileDialog}>Photo or Video Album</button>
+          <input
             ref={fileInputRef}
-            type="file" 
-            className="hidden" 
-            onChange={handleFileSelect} 
-            accept="image/*,video/*" 
+            type="file"
+            className="hidden"
+            onChange={handleFileSelect}
+            accept="image/*,video/*"
           />
         </div>
 
@@ -235,21 +235,21 @@ export default function HomeFeed() {
           </div>
           <input
             placeholder="What's on your mind?"
-            className="text-[#949FB7] border-none text-base w-full outline-none"
+            className="text-[#949FB7] font-sans border-none text-base w-full outline-none"
             onFocus={() => setIsPostPopupOpen(true)}
             readOnly
           />
         </div>
 
-        <div className="flex justify-between px-6 pb-4 pt-2">
-          <button className="flex items-center gap-2 text-[#C11759] text-sm" onClick={openFileDialog}>
-            <FaCamera /> Photo or Video
+        <div className="flex px-6 pb-4 pt-2">
+          <button className="flex items-center text-gray-600 text-sm" onClick={openFileDialog}>
+            <FaCamera className='text-[#C11759] font-sans text-lg mr-[5px]' /> Photo or Video
           </button>
-          <button className="flex items-center gap-2 text-[#C11759] text-sm" onClick={() => setIsPostPopupOpen(true)}>
-            <FaShareAlt /> Share
+          <button className="flex items-center text-gray-600 text-sm ml-[25px]" onClick={() => setIsPostPopupOpen(true)}>
+            <FaShareAlt  className='text-[#C11759] font-sans text-lg mr-[5px]'/> Share
           </button>
-          <button className="flex items-center gap-2 text-[#C11759] text-sm" onClick={() => setFontMenuVisible(!fontMenuVisible)}>
-            <FaFont /> Text
+          <button className="flex items-center text-gray-600 text-sm  ml-[25px]" onClick={() => setFontMenuVisible(!fontMenuVisible)}>
+            <FaFont  className='text-[#C11759] font-sans text-lg mr-[5px]'/> Text
           </button>
         </div>
 
@@ -270,14 +270,14 @@ export default function HomeFeed() {
       </div>
 
       {isPostPopupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white w-[600px] max-h-[80vh] rounded-lg shadow-lg p-6 flex flex-col">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg text-[#949FB7] font-bold">
                 {editingPost ? 'Edit Post' : 'Create Post'}
               </h2>
-              <button 
-                onClick={resetForm} 
+              <button
+                onClick={resetForm}
                 className="text-gray-500 hover:text-gray-700"
               >
                 ✕
@@ -288,19 +288,19 @@ export default function HomeFeed() {
                 <>
                   <div className="mb-4 relative">
                     {chosenFile.type === 'video' ? (
-                      <video 
-                        src={chosenFile.url} 
-                        controls 
-                        className="w-full max-h-96 rounded object-contain bg-black"
+                      <video
+                        src={chosenFile.url}
+                        controls
+                        className="w-full max-h-96 rounded object-contain"
                       />
                     ) : (
-                      <img 
-                        src={chosenFile.url} 
-                        className="w-full max-h-96 rounded object-contain" 
-                        alt="Preview" 
+                      <img
+                        src={chosenFile.url}
+                        className="w-full max-h-96 rounded object-contain"
+                        alt="Preview"
                       />
                     )}
-                    <button 
+                    <button
                       onClick={() => setChosenFile(null)}
                       className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
                     >
@@ -318,7 +318,7 @@ export default function HomeFeed() {
               ) : (
                 <div className="text-center py-10">
                   <p className="text-gray-500 mb-4">Please upload a photo or video first</p>
-                  <button 
+                  <button
                     onClick={openFileDialog}
                     className="bg-[#C11759] text-white py-2 px-6 rounded"
                   >
@@ -328,13 +328,13 @@ export default function HomeFeed() {
               )}
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <button 
+              <button
                 onClick={resetForm}
                 className="px-4 py-2 border rounded text-gray-600"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={editingPost ? handleUpdatePost : handlePostSubmit}
                 className="bg-[#C11759] text-white py-2 px-6 rounded disabled:opacity-50"
                 disabled={!chosenFile}
@@ -347,18 +347,18 @@ export default function HomeFeed() {
       )}
 
       {isDeleteConfirmOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white w-[400px] rounded-lg shadow-lg p-6">
             <h2 className="text-lg font-bold mb-4">Delete Post?</h2>
             <p className="mb-6">Are you sure you want to permanently delete this post?</p>
             <div className="flex justify-end gap-3">
-              <button 
+              <button
                 onClick={() => setIsDeleteConfirmOpen(false)}
                 className="px-4 py-2 border rounded text-gray-600"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={confirmDelete}
                 className="bg-red-500 text-white py-2 px-6 rounded"
               >
@@ -370,18 +370,18 @@ export default function HomeFeed() {
       )}
 
       {isCommentsPopupOpen && currentPostId && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white w-[600px] max-h-[80vh] rounded-lg shadow-lg p-6 flex flex-col">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">Comments</h2>
-              <button 
+              <button
                 onClick={() => setIsCommentsPopupOpen(false)}
                 className="text-gray-500 hover:text-gray-700"
               >
                 ✕
               </button>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto mb-4 space-y-4">
               {allPosts.find(p => p.id === currentPostId)?.comments.map(comment => (
                 <div key={comment.id} className="flex gap-3">
@@ -400,39 +400,22 @@ export default function HomeFeed() {
                 </div>
               ))}
             </div>
-            
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Add a comment..."
-                className="flex-1 border rounded p-2"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddComment(currentPostId)}
-              />
-              <button 
-                onClick={() => handleAddComment(currentPostId)}
-                className="bg-[#C11759] text-white py-2 px-4 rounded"
-              >
-                Post
-              </button>
-            </div>
           </div>
         </div>
       )}
 
-      <div className="mt-10 w-[570px] space-y-6">
+      <div className="mt-10 w-[570px] ml-[35px] space-y-6">
         {allPosts.map((post) => (
           <div key={post.id} className="bg-white rounded-2xl shadow-lg p-6">
             {/* Post Header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <Image 
-                    src={post.author.avatar} 
-                    alt={post.author.name} 
-                    width={48} 
-                    height={48} 
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    width={48}
+                    height={48}
                   />
                 </div>
                 <div>
@@ -519,31 +502,31 @@ export default function HomeFeed() {
                     </>
                   )
                 ) : (
-                  <img 
-                    src={post.media.url} 
-                    className="w-full h-full object-cover" 
-                    alt="Post content" 
+                  <img
+                    src={post.media.url}
+                    className="w-full h-full object-cover"
+                    alt="Post content"
                     style={{ minHeight: '16rem', maxHeight: '16rem' }}
                   />
                 )}
               </div>
             )}
             <div className="flex items-center justify-between py-2 px-1 mt-2 mb-2">
-              <button 
+              <button
                 onClick={() => toggleLike(post.id)}
                 className="flex items-center gap-2 text-[#C11759] text-base font-medium"
               >
                 <FaHeart className="text-[#C11759]" />
-                <span>{post.likes > 1000 ? (post.likes/1000).toFixed(1) + 'k' : post.likes} likes</span>
+                <span>{post.likes > 1000 ? (post.likes / 1000).toFixed(1) + 'k' : post.likes} likes</span>
               </button>
-              <button 
+              <button
                 onClick={() => openComments(post.id)}
                 className="flex items-center gap-2 text-[#949FB7] text-base font-medium"
               >
                 <FaComment />
                 <span>Comments ({post.comments.length})</span>
               </button>
-              <button 
+              <button
                 onClick={() => sharePost(post.id)}
                 className="flex items-center gap-2 text-[#C11759] text-base font-medium"
               >
@@ -561,7 +544,7 @@ export default function HomeFeed() {
                 onChange={(e) => setNewComment(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleAddComment(post.id)}
               />
-              <button 
+              <button
                 onClick={() => handleAddComment(post.id)}
                 className="text-[#C11759] text-2xl ml-2"
               >
